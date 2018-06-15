@@ -10,10 +10,10 @@ rankall <- function(outcome, num = "best"){
     if(is.na(match(outcome, c("heart attack", "heart failure", "pneumonia")))){
         stop("invalid outcome")}
    
-    statenames <-unique(data$state)
+    state <-unique(data$state)
     hospital <- character()
     
-    for(i in statenames){
+    for(i in state){
         
         data1 <- data[data$state == i, ]
         
@@ -25,8 +25,8 @@ rankall <- function(outcome, num = "best"){
         else {tempo <- data1[order(data1[[outcome]], data1$"hospital"), ][num, 1]}
         hospital <- c(hospital, tempo)
     }
-    result <- cbind(hospital, statenames)
+    result <- cbind(hospital, state)
     result <- as.data.frame(result)
-    result[order(result$statenames), ]
+    result[order(result$state), ]
     }
 
